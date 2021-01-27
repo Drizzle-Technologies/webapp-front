@@ -1,0 +1,11 @@
+{
+  "short_name": "Drizzle Technologies",
+  "name": "Drizzle Technologies",
+  "icons": [
+
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "rgb(121, 82, 179)",
+  "background_color": "#ffffff"
+}
