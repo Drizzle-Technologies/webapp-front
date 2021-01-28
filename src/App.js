@@ -1,10 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css"
-import Login from "./pages/login"
+import Routes from "./routes/routes"
+
+import { Provider } from "react-redux"
+import store from "./store"
+
+
 
 function App() {
   return (
     <div className="App">
-      <Login></Login>
+      <Provider store={store}>
+        <Routes />
+      </Provider>
     </div>
   );
 }
