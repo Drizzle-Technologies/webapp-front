@@ -1,3 +1,7 @@
 import { combineReducers } from "redux";
 
-export default combineReducers({});
+import dashboard from "./all/dashboard"
+
+export default combineReducers({
+    dashboard
+});
