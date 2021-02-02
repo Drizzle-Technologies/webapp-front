@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import { Container, Row, Col } from "react-bootstrap";
 import { DataGrid } from "@material-ui/data-grid";
+
+import Header from "../../components/header"
+import Sidebar from "../../components/sidebar"
 
 import api from "../../services/api";
 
@@ -37,16 +41,22 @@ const Dashboard = (props) => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      {console.log(devices)}
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
-          rows={devices}
-          columns={columns}
-          pageSize={5}
-          checkboxSelection
-        />
-      </div>
+      <Header />
+      <Row>
+        <Sidebar />
+        <Col xs={9} className="ml-sm-auto col-lg-10 pt-3 px-4">
+          <Container>
+            <div style={{ height: 400, width: "100%" }}>
+              <DataGrid
+                rows={devices}
+                columns={columns}
+                pageSize={5}
+                checkboxSelection
+              />
+            </div>
+          </Container>
+        </Col>
+      </Row>
     </div>
   );
 };

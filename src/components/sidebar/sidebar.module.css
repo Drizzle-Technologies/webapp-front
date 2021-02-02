@@ -1,0 +1,40 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0;
+  box-shadow: 1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.sidebarSticky {
+  position: sticky;
+  top: 55px;
+  padding-top: 0.75rem;
+  height: calc(100vh - 55px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #F7F6F8;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  color: var(--theme-text);
+  font-weight: 600;
+}
+
+.linkIcon {
+  color: rgba(0, 0, 41, 0.7);
+  opacity: 0.6;
+  margin-right: 0.5rem;
+}
+
+.link:hover{
+  color: var(--theme-text)
+}
+
+.link:hover .linkIcon{
+  opacity: 0.9;
+}
