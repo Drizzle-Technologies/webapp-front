@@ -70,7 +70,7 @@ const Login = (props) => {
           <Col xs={12} className="mt-5">
             <h1 style={{ fontWeight: 800, color: "#FEFEFE" }}>
               Drizzle
-              <em style={{ color: "#000", fontStyle: "normal" }}>
+              <em style={{ color: "#D0BAF3", fontStyle: "normal" }}>
                 Technologies
               </em>
             </h1>
