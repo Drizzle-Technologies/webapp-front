@@ -31,10 +31,16 @@ const Login = (props) => {
         props.history.push("/dashboard");
       })
       .catch((res) => {
-        const error = res.response.data;
-
-        setAlertMessage(error.description);
-        setShowAlert(true);
+        if (res.response) {
+          const error = res.response.data;
+          setAlertMessage(error.description);
+          setShowAlert(true);
+        } else {
+          setAlertMessage(
+            "Não foi possível se conectar ao servidor. Verifique a sua conexão."
+          );
+          setShowAlert(true);
+        }
       });
   }
 
