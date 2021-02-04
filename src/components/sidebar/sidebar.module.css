@@ -23,6 +23,7 @@
   align-items: center;
   color: var(--theme-text);
   font-weight: 600;
+  padding: .5rem 1rem;
 }
 
 .linkIcon {
@@ -32,9 +33,33 @@
 }
 
 .link:hover{
-  color: var(--theme-text)
+  color: var(--theme-text);
+  text-decoration: none;
 }
 
 .link:hover .linkIcon{
   opacity: 0.9;
+}
+
+.logout{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+  padding: 10px;
+  animation: fadein 0.7s;
+  color: var(--theme)
+}
+
+.logout:hover{
+  text-decoration: none !important;
+}
+
+.logoutButton{
+  background-color: var(--theme-text);
+  border: 0;
+}
+
+.logoutButton:hover{
+  background-color: var(--theme-text);
+  opacity: 0.6;
 }
