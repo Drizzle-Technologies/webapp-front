@@ -6,3 +6,7 @@ export const AuthLogin = () => {
       return false;
   }
 };
+
+export const RemoveAuth = () => {
+  localStorage.clear();
+}
