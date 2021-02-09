@@ -10,7 +10,7 @@ const Header = () => {
       expand="lg"
       className={styles.header}
     >
-      <Col xs={2}>
+      <Col xs={2} className="pl-0">
         <Navbar.Brand href="#home" style={{ color: "white", fontWeight: 600 }}>
           Drizzle Tech
         </Navbar.Brand>
