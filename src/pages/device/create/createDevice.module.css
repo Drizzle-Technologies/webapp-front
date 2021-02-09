@@ -1,0 +1,24 @@
+.button{
+    margin-top: 1rem;
+    background-color: var(--theme-text);
+    color: var(--theme);
+    opacity: 0.9;
+    border-color: var(--theme-text);
+    width: 100%;
+}
+
+.button:hover{
+    background-color: var(--theme-text);
+    color: var(--theme);
+    border-color: var(--theme-text);
+    opacity: 0.8;
+}
+
+.button:focus{
+    background-color: var(--theme-text);
+    color: var(--theme);
+    border-color: var(--theme-text);
+    opacity: 0.8;
+    outline: 0;
+    box-shadow: none;
+}

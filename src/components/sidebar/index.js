@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Col, Nav, Button } from "react-bootstrap";
-import { HomeRounded } from "@material-ui/icons";
+import { HomeRounded, AddCircleRounded } from "@material-ui/icons";
 
 import styles from "./sidebar.module.css";
 
@@ -14,12 +14,20 @@ const Sidebar = () => {
           className="mr-auto flex-column justify-content-between h-100"
           style={{ color: "var(--theme-text)" }}
         >
-          <div>
+          <section>
             <Link to="/dashboard" className={styles.link}>
               <HomeRounded className={styles.linkIcon} />
-              Dashboard
+              dashboard
             </Link>
-          </div>
+            <h6 className={`${styles.sidebarHeader} px-3 mt-4 mb-`}>Ações</h6>
+            <Link to="/dispositivo/criar" className={styles.link}>
+              <AddCircleRounded
+                className={styles.linkIcon}
+                style={{ fontSize: "1rem" }}
+              />
+              dispositivo
+            </Link>
+          </section>
           <Link to="/logout" className={styles.logout}>
             <Button className={styles.logoutButton}>Logout</Button>
           </Link>
