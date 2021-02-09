@@ -33,7 +33,9 @@ const Dashboard = (props) => {
           dispatch(DashboardActions.setData(res.data));
         })
         .catch((res) => {
-          console.log(res.response.data);
+          if(res.response){
+            console.log(res.response.data);
+          }
         });
     }
     getData();
