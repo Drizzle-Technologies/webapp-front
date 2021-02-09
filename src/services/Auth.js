@@ -9,4 +9,5 @@ export const AuthLogin = () => {
 
 export const RemoveAuth = () => {
   localStorage.clear();
+  window.location.reload();
 }
