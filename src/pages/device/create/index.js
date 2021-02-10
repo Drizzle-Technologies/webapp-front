@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Slide, IconButton } from "@material-ui/core";
+import { Close } from "@material-ui/icons";
+import { Alert } from "@material-ui/lab";
 
 import Header from "../../../components/header";
 import Sidebar from "../../../components/sidebar";
@@ -13,6 +16,9 @@ const CreateDevice = () => {
   const [shopName, setShopName] = useState("");
   const [area, setArea] = useState("");
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const[showAlert, setShowAlert] = useState(false);
+
   function sendData() {
     const pathname = "/device/create";
     const data = {
@@ -23,8 +29,14 @@ const CreateDevice = () => {
     api
       .post(pathname, data)
       .then((res) => {
-        if (res.response.data) {
-          console.log(res.response.data);
+        console.log(res)
+        if (res.data) {
+          console.log("Entrei")
+          setAlertMessage("Dispositivo criado com sucesso!")
+          setShowAlert(true)
+
+          setShopName("");
+          setArea("");
         }
       })
       .catch((error) => {
@@ -43,6 +55,26 @@ const CreateDevice = () => {
 
   return (
     <div>
+      <Slide in={showAlert} direction="right" mountOnEnter className={styles.alert}>
+        <Alert
+          severity="success"
+          variant="filled"
+          action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setShowAlert(false);
+              }}
+            >
+              <Close fontSize="inherit" />
+            </IconButton>
+          }
+        >
+          {alertMessage}
+        </Alert>
+      </Slide>
       <Header />
       <Row>
         <Sidebar />
@@ -58,6 +90,7 @@ const CreateDevice = () => {
                     placeholder="estabelecimento"
                     aria-label="Nome do Estabelecimento"
                     onChange={(event) => setShopName(event.target.value)}
+                    value={shopName}
                   />
                 </Form.Group>
                 <Form.Group>
@@ -68,6 +101,7 @@ const CreateDevice = () => {
                     placeholder="área"
                     aria-label="Área do estabelecimento"
                     onChange={(event) => setArea(event.target.value)}
+                    value={area}
                   />
                 </Form.Group>
                 <Button type="submit" className={styles.button}>
