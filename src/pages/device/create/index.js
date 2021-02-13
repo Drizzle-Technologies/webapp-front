@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { Slide, IconButton } from "@material-ui/core";
-import { Close } from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
 
 import Header from "../../../components/header";
 import Sidebar from "../../../components/sidebar";
@@ -12,12 +9,15 @@ import api from "../../../services/api";
 
 import styles from "./createDevice.module.css";
 
+import * as AlertsActions from "../../../store/actions/alerts";
+
+import { useDispatch } from "react-redux";
+
 const CreateDevice = () => {
   const [shopName, setShopName] = useState("");
   const [area, setArea] = useState("");
 
-  const [alertMessage, setAlertMessage] = useState("");
-  const[showAlert, setShowAlert] = useState(false);
+  const dispatch = useDispatch();
 
   function sendData() {
     const pathname = "/device/create";
@@ -29,11 +29,10 @@ const CreateDevice = () => {
     api
       .post(pathname, data)
       .then((res) => {
-        console.log(res)
         if (res.data) {
-          console.log("Entrei")
-          setAlertMessage("Dispositivo criado com sucesso!")
-          setShowAlert(true)
+          dispatch(
+            AlertsActions.setAlert("Dispositivo criado com sucesso!", "success")
+          );
 
           setShopName("");
           setArea("");
@@ -55,26 +54,6 @@ const CreateDevice = () => {
 
   return (
     <div>
-      <Slide in={showAlert} direction="right" mountOnEnter className={styles.alert}>
-        <Alert
-          severity="success"
-          variant="filled"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setShowAlert(false);
-              }}
-            >
-              <Close fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          {alertMessage}
-        </Alert>
-      </Slide>
       <Header />
       <Row>
         <Sidebar />

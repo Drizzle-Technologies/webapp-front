@@ -1,0 +1,8 @@
+.alert{
+    position: absolute;
+    z-index: 100000;
+    width: 100%;
+    height: 56px;
+    border-radius: 0;
+    align-items: center;
+}
