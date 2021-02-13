@@ -3,7 +3,7 @@ const INITIAL_STATE = {
 };
 
 function dashboard(state = INITIAL_STATE, action) {
-  console.log("Action ", action)
+
   if ("DASHBOARD_SET_DATA" === action.type) {
     const data = action.data;
     state = { ...state, devices: data.devices };
