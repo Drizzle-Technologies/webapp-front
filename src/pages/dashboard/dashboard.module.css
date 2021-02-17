@@ -1,0 +1,28 @@
+.deleteButton{
+    background-color: #EE4266;
+    border-color: #EE4266;
+    margin-top: 1.5rem;
+}
+
+.deleteButton:hover{
+    background-color: #EE4266;
+    border-color: #EE4266;
+    opacity: 0.8;
+    outline: none;
+    box-shadow: none;
+}
+
+.deleteButton:focus{
+    background-color: #EE4266;
+    border-color: #EE4266;
+    outline: none;
+    box-shadow: none;
+}
+
+.deleteButton:active{
+    background-color: #EE4266;
+    border-color: #EE4266;
+    opacity: 0.8;
+    outline: none;
+    box-shadow: none;
+}
