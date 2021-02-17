@@ -12,12 +12,14 @@ import Sidebar from "../../components/sidebar";
 import api from "../../services/api";
 
 import * as DashboardActions from "../../store/actions/dashboard";
+import * as AlertsActions from "../../store/actions/alerts";
 
 const Dashboard = (props) => {
   const dispatch = useDispatch();
   const devices = useSelector((state) => state.dashboard.devices);
 
   const [rowSelection, setRowSelection] = useState([]);
+  const [requestData, setRequestData] = useState(new Date());
 
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
@@ -43,22 +45,28 @@ const Dashboard = (props) => {
         });
     }
     getData();
-  }, [dispatch]);
+  }, [dispatch, requestData]);
 
   async function deleteDevice() {
     const pathname = "/device/delete";
 
     const idList = rowSelection;
 
-    const data = { idList: idList };
-
-    await api.delete(pathname, data)
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    await api
+      .delete(pathname, {
+        data: {
+          idList: idList,
+        },
+      })
+      .then((res) => {
+        dispatch(
+          AlertsActions.setAlert("Dispositivo(s) removido(s)!", "success")
+        );
+        setRequestData(new Date());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
