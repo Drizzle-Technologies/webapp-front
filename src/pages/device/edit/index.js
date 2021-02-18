@@ -7,6 +7,7 @@ import Sidebar from "../../../components/sidebar";
 
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { EditRounded } from "@material-ui/icons";
 
 import api from "../../../services/api";
 
@@ -46,17 +47,20 @@ const EditDevice = (props) => {
     const pathname = "/device/edit";
     const data = { deviceID: value.id, newArea: area };
 
-    await api.patch(pathname, data)
-    .then((res) => {
-      if(res.data){
-        dispatch(AlertsActions.setAlert("Dispositivo foi editado!", "success"))
-        setValue("");
-        setArea("");
-      }
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    await api
+      .patch(pathname, data)
+      .then((res) => {
+        if (res.data) {
+          dispatch(
+            AlertsActions.setAlert("Dispositivo foi editado!", "success")
+          );
+          setValue("");
+          setArea("");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const submit = (event) => {
@@ -73,21 +77,29 @@ const EditDevice = (props) => {
         <Col xs={9} className="ml-sm-auto col-lg-10 pt-3 px-4">
           <Container className="d-flex justify-content-center">
             <div className="w-50" style={{ minWidth: "500px" }}>
+              <h2 className="d-flex align-items-center mb-4">
+                Editar Área
+                <EditRounded
+                  className={styles.linkIcon}
+                  style={{ fontSize: "1.5rem" }}
+                />
+              </h2>
               <Form onSubmit={submit}>
                 <Form.Group>
                   <Autocomplete
                     id="device-selection"
                     options={devices}
-                    getOptionLabel={(option) => option ? option.shop_name : ""}
+                    getOptionLabel={(option) =>
+                      option ? option.shop_name : ""
+                    }
                     style={{ width: "100%" }}
                     value={value}
                     onChange={(event, newValue) => {
-                      console.log(newValue)
-                      if(newValue){
+                      console.log(newValue);
+                      if (newValue) {
                         setValue(newValue);
                         setArea(newValue.area);
-                      }
-                      else{
+                      } else {
                         setArea("");
                       }
                     }}

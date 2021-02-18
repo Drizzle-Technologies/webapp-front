@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { AddCircleRounded } from "@material-ui/icons"
 
 import Header from "../../../components/header";
 import Sidebar from "../../../components/sidebar";
@@ -60,6 +61,13 @@ const CreateDevice = () => {
         <Col xs={9} className="ml-sm-auto col-lg-10 pt-4 px-4">
           <Container className="d-flex justify-content-center">
             <div className="w-50" style={{ minWidth: "500px" }}>
+            <h2 className="d-flex align-items-center mb-4">
+                Criar Dispositivo
+                <AddCircleRounded
+                  className={styles.linkIcon}
+                  style={{ fontSize: "1.5rem" }}
+                />
+              </h2>
               <Form onSubmit={submit}>
                 <Form.Group>
                   <Form.Label>Nome do Estabelecimento</Form.Label>
@@ -84,7 +92,7 @@ const CreateDevice = () => {
                   />
                 </Form.Group>
                 <Button type="submit" className={styles.button}>
-                  Enviar
+                  Criar
                 </Button>
               </Form>
             </div>
