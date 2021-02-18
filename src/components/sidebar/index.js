@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Col, Nav, Button } from "react-bootstrap";
-import { HomeRounded, AddCircleRounded } from "@material-ui/icons";
+import { HomeRounded, AddCircleRounded, EditRounded } from "@material-ui/icons";
 
 import styles from "./sidebar.module.css";
 
@@ -22,6 +22,13 @@ const Sidebar = () => {
             <h6 className={`${styles.sidebarHeader} px-3 mt-4 mb-`}>Ações</h6>
             <Link to="/dispositivo/criar" className={styles.link}>
               <AddCircleRounded
+                className={styles.linkIcon}
+                style={{ fontSize: "1rem" }}
+              />
+              dispositivo
+            </Link>
+            <Link to="/dispositivo/editar" className={styles.link}>
+              <EditRounded
                 className={styles.linkIcon}
                 style={{ fontSize: "1rem" }}
               />
