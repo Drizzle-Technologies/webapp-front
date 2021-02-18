@@ -2,9 +2,9 @@ const INITIAL_STATE = {
   devices: [],
 };
 
-function dashboard(state = INITIAL_STATE, action) {
+function devices(state = INITIAL_STATE, action) {
 
-  if ("DASHBOARD_SET_DATA" === action.type) {
+  if ("DEVICES_SET_DATA" === action.type) {
     const data = action.data;
     state = { ...state, devices: data.devices };
   }
@@ -12,4 +12,4 @@ function dashboard(state = INITIAL_STATE, action) {
   return state;
 }
 
-export default dashboard;
+export default devices;

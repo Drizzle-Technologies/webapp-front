@@ -2,9 +2,9 @@ import { combineReducers } from "redux";
 
 import alerts from "./all/alerts"
 
-import dashboard from "./all/dashboard"
+import devices from "./all/devices"
 
 export default combineReducers({
     alerts,
-    dashboard
+    devices
 });

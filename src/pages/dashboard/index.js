@@ -11,12 +11,12 @@ import Sidebar from "../../components/sidebar";
 
 import api from "../../services/api";
 
-import * as DashboardActions from "../../store/actions/dashboard";
+import * as DevicesActions from "../../store/actions/devices";
 import * as AlertsActions from "../../store/actions/alerts";
 
 const Dashboard = (props) => {
   const dispatch = useDispatch();
-  const devices = useSelector((state) => state.dashboard.devices);
+  const devices = useSelector((state) => state.devices.devices);
 
   const [rowSelection, setRowSelection] = useState([]);
   const [requestData, setRequestData] = useState(new Date());
@@ -36,7 +36,7 @@ const Dashboard = (props) => {
       await api
         .get(pathname)
         .then((res) => {
-          dispatch(DashboardActions.setData(res.data));
+          dispatch(DevicesActions.setData(res.data));
         })
         .catch((res) => {
           if (res.response) {

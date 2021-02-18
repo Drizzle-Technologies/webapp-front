@@ -13,14 +13,14 @@ import api from "../../../services/api";
 
 import styles from "./editDevice.module.css";
 
-import * as DashboardActions from "../../../store/actions/dashboard";
+import * as DevicesActions from "../../../store/actions/devices";
 import * as AlertsActions from "../../../store/actions/alerts";
 
 import { useSelector, useDispatch } from "react-redux";
 
 const EditDevice = (props) => {
   const dispatch = useDispatch();
-  const devices = useSelector((state) => state.dashboard.devices);
+  const devices = useSelector((state) => state.devices.devices);
 
   const [value, setValue] = useState("");
   const [area, setArea] = useState("");
@@ -32,11 +32,11 @@ const EditDevice = (props) => {
       await api
         .get(pathname)
         .then((res) => {
-          dispatch(DashboardActions.setData(res.data));
+          dispatch(DevicesActions.setData(res.data));
         })
-        .catch((res) => {
-          if (res.response) {
-            console.log(res.response.data);
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
           }
         });
     }

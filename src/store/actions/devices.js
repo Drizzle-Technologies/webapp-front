@@ -1,6 +1,6 @@
 export function setData(data) {
   return {
-    type: "DASHBOARD_SET_DATA",
+    type: "DEVICES_SET_DATA",
     data,
   };
 }
