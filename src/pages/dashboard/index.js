@@ -12,11 +12,15 @@ import Sidebar from "../../components/sidebar";
 import api from "../../services/api";
 
 import * as DevicesActions from "../../store/actions/devices";
+import * as GraphActions from "../../store/actions/graph";
 import * as AlertsActions from "../../store/actions/alerts";
+
+import { Line } from "react-chartjs-2";
 
 const Dashboard = (props) => {
   const dispatch = useDispatch();
   const devices = useSelector((state) => state.devices.devices);
+  const graphData = useSelector((state) => state.graph.data);
 
   const [rowSelection, setRowSelection] = useState([]);
   const [requestData, setRequestData] = useState(new Date());
@@ -31,16 +35,28 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     async function getData() {
-      const pathname = "/dashboard";
+      const pathnameDevice = "/dashboard";
+      const pathnameGraph = "/occupancy/graph/2/24";
 
       await api
-        .get(pathname)
+        .get(pathnameDevice)
         .then((res) => {
           dispatch(DevicesActions.setData(res.data));
         })
-        .catch((res) => {
-          if (res.response) {
-            console.log(res.response.data);
+        .catch((err) => {
+          if (err.response) {
+            console.log(err.response.data);
+          }
+        });
+
+      await api
+        .get(pathnameGraph)
+        .then((res) => {
+          dispatch(GraphActions.setData(res.data));
+        })
+        .catch((err) => {
+          if (err.response) {
+            console.log(err.response.data);
           }
         });
     }
@@ -72,10 +88,13 @@ const Dashboard = (props) => {
   return (
     <div>
       <Header />
-      <Row>
+      <Row style={{ maxWidth: "100vw" }}>
         <Sidebar />
         <Col xs={9} className="ml-sm-auto col-lg-10 pt-3 px-4">
           <Container>
+            <section className={styles.graphContainer}>
+              <Line data={graphData} />
+            </section>
             <div style={{ height: 400, width: "100%" }}>
               <DataGrid
                 rows={devices}

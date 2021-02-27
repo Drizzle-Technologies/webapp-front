@@ -1,3 +1,8 @@
+.graphContainer{
+    padding-top: 1rem;
+    margin-bottom: 3rem;
+}
+
 .deleteButton{
     background-color: #EE4266;
     border-color: #EE4266;
