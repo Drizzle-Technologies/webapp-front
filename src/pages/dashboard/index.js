@@ -65,7 +65,7 @@ const Dashboard = (props) => {
   }, [dispatch, requestData]);
 
   async function deleteDevice() {
-    console.log("rowSelection", rowSelection)
+
     if(rowSelection.length > 0){
       const pathname = "/device/delete";
       const idList = rowSelection;

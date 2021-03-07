@@ -21,6 +21,7 @@ function graph(state = INITIAL_STATE, action) {
 
   if ("GRAPH_SET_OPTIONS" === action.type) {
     const data = action.data;
+    state.shopNamesOptions = [];
 
     for (let device of data.devices) {
       const shopOption = { lable: device.shop_name, id: device.id };
