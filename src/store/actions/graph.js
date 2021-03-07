@@ -4,3 +4,10 @@ export function setData(data){
         data
     }
 }
+
+export function setOptions(data){
+    return {
+        type: "GRAPH_SET_OPTIONS",
+        data
+    }
+}

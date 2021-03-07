@@ -3,6 +3,35 @@
     margin-bottom: 3rem;
 }
 
+.drawButton{
+    background-color: #7632DB;
+    border-color: #7632DB;
+    margin-left: 30px;
+}
+
+.drawButton:hover{
+    background-color: #7632DB;
+    border-color: #7632DB;
+    opacity: 0.8;
+    outline: none;
+    box-shadow: none;
+}
+
+.drawButton:focus{
+    background-color: #7632DB;
+    border-color: #7632DB;
+    outline: none;
+    box-shadow: none;
+}
+
+.drawButton:active{
+    background-color: #7632DB;
+    border-color: #7632DB;
+    opacity: 0.8;
+    outline: none;
+    box-shadow: none;
+}
+
 .deleteButton{
     background-color: #EE4266;
     border-color: #EE4266;
