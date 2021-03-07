@@ -19,6 +19,8 @@ import * as AlertsActions from "../../store/actions/alerts";
 
 import { Line } from "react-chartjs-2";
 
+import Moment from "react-moment";
+
 const Dashboard = (props) => {
   const dispatch = useDispatch();
   const devices = useSelector((state) => state.devices.devices);
@@ -58,39 +60,45 @@ const Dashboard = (props) => {
             console.log(err.response.data);
           }
         });
-
     }
     getData();
   }, [dispatch, requestData]);
 
   async function deleteDevice() {
-    const pathname = "/device/delete";
-
-    const idList = rowSelection;
-
-    await api
-      .delete(pathname, {
-        data: {
-          idList: idList,
-        },
-      })
-      .then((res) => {
-        dispatch(
-          AlertsActions.setAlert("Dispositivo(s) removido(s)!", "success")
-        );
-        setRequestData(new Date());
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log("rowSelection", rowSelection)
+    if(rowSelection.length > 0){
+      const pathname = "/device/delete";
+      const idList = rowSelection;
+  
+      await api
+        .delete(pathname, {
+          data: {
+            idList: idList,
+          },
+        })
+        .then((res) => {
+          dispatch(
+            AlertsActions.setAlert("Dispositivo(s) removido(s)!", "success")
+          );
+          setRequestData(new Date());
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else{
+      dispatch(
+        AlertsActions.setAlert(
+          "Selecione um dispositivo na tabela para deletá-lo!",
+          "error"
+        )
+      );
+    }
+    
   }
 
   async function plotGraph() {
-    console.log("plotgraph")
-    console.log("deviceIdPlotted", deviceIdPlotted)
-    console.log("nLinesPlotted", nLinesPlotted)
-    if(deviceIdPlotted && nLinesPlotted){
-      console.log("inside")
+    if (deviceIdPlotted && nLinesPlotted) {
+      console.log("inside");
       const pathname = `/occupancy/graph/${deviceIdPlotted}/${nLinesPlotted}`;
 
       await api
@@ -103,6 +111,13 @@ const Dashboard = (props) => {
             console.log(err.response.data);
           }
         });
+    } else {
+      dispatch(
+        AlertsActions.setAlert(
+          "Selecione um dispositivo e o número de observações para desenhar o gráfico!",
+          "error"
+        )
+      );
     }
   }
 
@@ -114,7 +129,15 @@ const Dashboard = (props) => {
         <Col xs={9} className="ml-sm-auto col-lg-10 pt-3 px-4">
           <Container>
             <section className={styles.graphContainer}>
-              <span>Dia e hora {firstDatetime}</span>
+              {firstDatetime ? (
+                <span>
+                  Dia e hora{" "}
+                  <Moment format="DD/MM/YYYY h:mm:ss a">{firstDatetime}</Moment>
+                </span>
+              ) : (
+                ""
+              )}
+
               <Line
                 data={graphData}
                 options={{
@@ -133,16 +156,29 @@ const Dashboard = (props) => {
                     intersect: false,
                     position: "nearest",
                   },
+                  scales: {
+                    xAxes: [
+                      {
+                        type: "time",
+                        time: {
+                          unit: "minute",
+                          tooltipFormat: "DD/MM/YYYY h:mm:ss a",
+                        },
+                        ticks: {
+                          autoSkip: true,
+                          maxTicksLimit: 20,
+                        },
+                      },
+                    ],
+                  },
                 }}
               />
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center mt-3">
                 <Autocomplete
                   id="combo-box-ids"
                   options={shopNamesOptions}
-                  style={{ width: "25%", marginLeft: "30px" }}
-                  getOptionLabel={(option) =>
-                    option ? option.lable : ""
-                  }
+                  style={{ width: "25%" }}
+                  getOptionLabel={(option) => (option ? option.lable : "")}
                   onChange={(event, value) => {
                     if (value) {
                       setDeviceIdPlotted(value.id);
@@ -158,9 +194,7 @@ const Dashboard = (props) => {
                   id="combo-box-nLines"
                   options={nLinesOptions}
                   style={{ width: "25%", marginLeft: "30px" }}
-                  getOptionLabel={(option) =>
-                    option ? option.lable : ""
-                  }
+                  getOptionLabel={(option) => (option ? option.lable : "")}
                   defaultValue={nLinesOptions[0]}
                   onChange={(event, value) => {
                     if (value) {
