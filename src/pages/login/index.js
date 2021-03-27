@@ -17,17 +17,17 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function login() {
+  async function login() {
     let pathname = "/login";
 
     const data = { username: username, password: password };
-    api
+    await api
       .post(pathname, data)
       .then((res) => {
-        const { authorization, timestamp } = res.data;
+        const { authorization, refreshToken } = res.data;
 
-        localStorage.setItem("token", authorization);
-        localStorage.setItem("time", timestamp);
+        localStorage.setItem("accessToken", authorization);
+        localStorage.setItem("refreshToken", refreshToken);
 
         props.history.push("/dashboard");
       })
@@ -36,9 +36,12 @@ const Login = (props) => {
           const error = res.response.data;
           dispatch(AlertsActions.setAlert(error.description, "error"));
         } else {
-          dispatch(AlertsActions.setAlert(
-            "Não foi possível se conectar ao servidor. Verifique a sua conexão.", "error"
-          ));
+          dispatch(
+            AlertsActions.setAlert(
+              "Não foi possível se conectar ao servidor. Verifique a sua conexão.",
+              "error"
+            )
+          );
         }
       });
   }

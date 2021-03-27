@@ -1,5 +1,5 @@
 export const AuthLogin = () => {
-  if (!localStorage.getItem("token")) {
+  if (!localStorage.getItem("accessToken")) {
     return true;
   }
   else{
